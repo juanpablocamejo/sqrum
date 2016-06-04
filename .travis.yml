@@ -5,10 +5,8 @@ python:
   - "2.7"
 # command to install dependencies
 before_install:
-  - sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-  - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-  - sudo apt-get update
-  - sudo apt-get install google-chrome-stable
+  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo dpkg -i google-chrome-stable_current_amd64.deb
   - sudo cat Aptfile | xargs apt-get install
 install: "pip install -r requirements.txt"
 script: xvfb-run nosetests -v pruebas/tests/*.py
