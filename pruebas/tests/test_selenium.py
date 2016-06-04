@@ -7,4 +7,4 @@ class PythonOrgSearch(unittest.TestCase):
         browser.get('http://www.python.org')
         self.assertEqual('Welcome to Python.org', browser.title)
         body = browser.find_element_by_css_selector('body')
-        self.assertIn('pytehon', body.text)
+        self.assertIn('python', body.text)
