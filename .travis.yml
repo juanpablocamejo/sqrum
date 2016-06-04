@@ -4,8 +4,8 @@ python:
   - "2.7"
 # command to install dependencies
 before_install:
-  - bash installChrome.sh
-  - cat Aptfile | xargs sudo apt-get install
+  - bash installChrome.sh || (apt-get -f install && bash installChrome.sh)
+  - cat Aptfile | xargs apt-get install
 install: "pip install -r requirements.txt"
 script: xvfb-run nosetests -v pruebas/tests/*.py
 branches:
