@@ -6,7 +6,7 @@ python:
 # command to install dependencies
 before_install:
   - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo dpkg -i -depends google-chrome-stable_current_amd64.deb
+  - sudo dpkg -i --no-force-depends google-chrome-stable_current_amd64.deb
   - apt-get -f install 
   - sudo cat Aptfile | xargs apt-get install
 install: "pip install -r requirements.txt"
