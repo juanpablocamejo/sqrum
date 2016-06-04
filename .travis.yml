@@ -3,7 +3,13 @@ language: python
 python:
   - "2.7"
 # command to install dependencies
-script: nosetests pruebas/tests/*.py
+addons:
+  apt:
+    packages:
+    - firefox
+    - xvfb
+install: "pip install -r requirements.txt"
+script: xvfb-run nosetests pruebas/tests/*.py
 branches:
   only:
     - master
