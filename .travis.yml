@@ -5,7 +5,6 @@ python:
   - "2.7"
 # command to install dependencies
 before_install:
-  - sudo apt-get -qq update
   - sudo cat Aptfile | sudo xargs apt-get install -y --force-yes
   - sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   - sudo dpkg --force-all -i google-chrome-stable_current_amd64.deb
