@@ -9,5 +9,9 @@ libexpat1
 libfontconfig1
 libfreetype6
 libgcc1
+libstdc++6
+fonts-liberation
+libappindicator1
+lsb-base
 xvfb
 firefox
