@@ -1,5 +1,5 @@
 import unittest
-from modulos.modulo_de_prueba import *
+from pruebas.modulos.modulo_de_prueba import *
 
 class ClaseDePruebaTest(unittest.TestCase):
     

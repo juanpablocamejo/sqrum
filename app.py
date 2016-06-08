@@ -7,6 +7,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqrum.db'
 db = SQLAlchemy(app)
 
 from api.models import *
+from api.controllers import *
+
 db.create_all()
 
 if __name__ == '__main__':
