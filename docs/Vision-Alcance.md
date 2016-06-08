@@ -15,9 +15,7 @@
     - 4.3.2. Perfiles de los Usuarios
   - 4.4. Supuestos y Dependencias
   - 4.5. Restricciones de fechas
-  - 4.6. Otras restricciones
-* 5. CRONOGRAMA
-* 6. RIESGOS
+* 5. RIESGOS
 
 --------
 ###INTRODUCCIÓN
