@@ -21,6 +21,15 @@ with _app.app_context():
      db.create_all()
      test_data.insertar_datos()
 
+@app.route('/')
+def root():
+  return app.send_static_file('./front/index.html')
+
+@app.route('/<path:path>')
+def static_proxy(path):
+  # send_static_file will guess the correct MIME type
+  return app.send_static_file('./front/' + path)
+  
 if __name__ == '__main__':
      port = int(os.getenv('PORT', 8081))
      host = os.getenv('IP', '0.0.0.0')
