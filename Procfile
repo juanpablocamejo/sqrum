@@ -1,1 +1,2 @@
-web: python app.py&; cd front; python -m SimpleHTTPServer 8080
+web: python app.py; 
+web: cd front; python -m SimpleHTTPServer 8080
