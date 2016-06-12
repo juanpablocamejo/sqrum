@@ -22,6 +22,6 @@ with _app.app_context():
      test_data.insertar_datos()
 
 if __name__ == '__main__':
-     port = int(os.getenv('PORT', 8080))
+     port = int(os.getenv('PORT', 8081))
      host = os.getenv('IP', '0.0.0.0')
      _app.run(port=port, host=host, debug=True)
