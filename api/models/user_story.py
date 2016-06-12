@@ -1,4 +1,4 @@
-from app import *
+from orm import db
 
 class UserStory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -8,6 +8,7 @@ class UserStory(db.Model):
     rol = db.relationship('Rol')
     estado_id = db.Column(db.Integer)
 
-    def __init__(self, quiero, para):
+    def __init__(self, quiero, para, rol):
         self.quiero = quiero
         self.para = para
+        self.rol = rol

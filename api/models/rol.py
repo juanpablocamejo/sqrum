@@ -1,4 +1,4 @@
-from app import *
+from orm import db
 
 class Rol(db.Model):
     id = db.Column(db.Integer, primary_key=True)

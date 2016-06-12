@@ -1,17 +1,27 @@
 import os
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqrum.db'
-db = SQLAlchemy(app)
-
-from api.models import *
+from flask_restful import Api
+from orm import db
+import test_data
 from api.controllers import *
+from api.models import *
 
-db.create_all()
+#init Flask WebApp
+_app = Flask(__name__)
+_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqrum.db'
+
+#init Flask_restful API
+_api.init_app(_app)
+
+#init SQLAlchemy ORM
+db.init_app(_app)
+
+with _app.app_context():
+     db.drop_all()
+     db.create_all()
+     test_data.insertar_datos()
 
 if __name__ == '__main__':
      port = int(os.getenv('PORT', 8080))
      host = os.getenv('IP', '0.0.0.0')
-     app.run(port=port, host=host)
+     _app.run(port=port, host=host, debug=True)
