@@ -141,13 +141,13 @@
         menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav side-nav">
-            <li class="active">
+            <li>
               <a href="blank-page.html"><i class="fa fa-fw fa-dashboard"></i> Tablero</a>
             </li>
             <li>
               <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Estadisticas</a>
             </li>
-            <li>
+            <li class="active">
               <a href="edit-panel.html"><i class="fa fa-fw fa-edit"></i> Agregar/eliminar U.S</a>
             </li>
           </ul>
@@ -160,8 +160,24 @@
           <div class="row">
             <div class="col-lg-12">
               <h1 class="page-header">SQrum
-                <small>Tablero</small>
+                <small>Panel de edicion</small>
               </h1>
+              <h1>Agregar UserStory</h1>
+              <form role="form">
+                <div class="form-group has-feedback">
+                  <label class="control-label" for="exampleInputEmail1">Como:</label>
+                  <input class="form-control" name="como" id="como" placeholder="Ej: Empleado" type="text">
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="quiero">Quiero:</label>
+                  <input class="form-control" name="quiero" id="quiero" placeholder="Ej: quiero poder...." type="text">
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="para">Para:</label>
+                  <input class="form-control" name="para" id="para" placeholder="telefono" type="text">
+                </div>
+                <button id="agregar" name="agregar" class="btn btn-primary">Agregar</button>
+              </form>
             </div>
           </div>
           <!-- /.row -->
