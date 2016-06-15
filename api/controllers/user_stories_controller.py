@@ -6,6 +6,7 @@ from api.models import *
 #JSON
 us_json = {
     'us_id': fields.Integer,
+    'rol.nombre': fields.String,
     'rol_id': fields.Integer,
     'quiero': fields.String,
     'para': fields.String,
