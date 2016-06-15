@@ -1,5 +1,5 @@
 from flask_restful import Resource, fields, marshal_with, abort
-from web_api import _api
+from common import _api
 from api.models import *
 
 #JSON
@@ -14,15 +14,16 @@ class RolesRes(Resource):
     def get(self):
         return Rol.query.all()
         
+_api.add_resource(RolesRes,'/api/rol/')
+
+        
 class RolRes(Resource):
     @marshal_with(rol_json)    
-    def get(self, rol_id):
-        res = Rol.query.get(rol_id)
+    def get(self, id):
+        res = Rol.query.get(id)
         if res is None:
             abort(410,message="Rol inexistente")
         else:
-            return Rol.query.get(rol_id)
+            return Rol.query.get(id)
             
-        
-_api.add_resource(RolesRes,'/api/rol/')
-_api.add_resource(RolRes,'/api/rol/<int:rol_id>')
+_api.add_resource(RolRes, '/api/rol/<int:id>')
