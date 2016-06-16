@@ -51,3 +51,45 @@
 ######Fin de Iteración #1: 8/06/2016
 
 ######- Se realizo la Tarea-06 pendiente de la iteración #0.
+
+##Planning Iteración #2: 8/06/2016
+
+
+>US-01: Como Product Owner Quiero Eliminar una US del Proyecto.
+
+>US-02: Como Miembro del proyecto Quiero Visualizar el Product Backlog del proyecto actual.
+
+>US-03: Como Product Owner Quiero Agregar una User Story al proyecto actual.
+
+>Tarea-01: Como Usuario de la API-REST Quiero Obtener el Product Backlog de un proyecto.
+
+>Tarea-02: Como Usuario de la API-REST Quiero Agregar una User Story a un proyecto.
+
+>Tarea-03: Investigar y probar herramientas para tests de aceptación y tests de la API REST.
+
+
+- [Backlog] (https://trello.com/b/1fdlY3Oy/sqrum)
+
+######Velocidad de la iteración: -
+
+######Fin de Iteración #2: 15/06/2016
+
+######- Pendiente para la iteración #3: US-01, US-03, Tarea-03(Únicamente falta probar).
+
+##Planning Iteración #3: 15/06/2016
+
+>US-01: Como Product Owner Quiero Eliminar una US del Proyecto.
+
+>US-02: Como Product Owner Quiero Agregar una User Story al proyecto actual
+
+>US-03: Como Miembro del equipo Quiero Cambiar el estado a una US del proyecto actual
+
+>US-04: Como Product Owner Quiero Priorizar una US del proyecto actual
+
+>Tarea-03: probar BEHAVE y tests de la API REST.
+
+- [Backlog] (https://trello.com/b/1fdlY3Oy/sqrum)
+
+######Velocidad de la iteración: -
+
+######Fin de Iteración #3: 22/06/2016
