@@ -1,0 +1,12 @@
+<html>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+    
+    <script>
+        data = { rol_id:1, estado_id:1, quiero:'quiero de prueba', para: 'para de prueba', estimacion:1, prioridad:1, obs:'obs de prueba'}
+    
+        $.post( "/api/user_story/",data).done( function(res) {
+            alert( "El Id de la nueva story es: " + res );
+        });
+    </script>
+</html>
