@@ -1,5 +1,4 @@
-from flask_restful import Resource, fields, marshal_with, abort
-from flask import make_response
+from flask_restful import Resource, fields, marshal_with, abort, request
 from common import _api
 from api.models import *
 
@@ -20,6 +19,15 @@ class StoriesRes(Resource):
     @marshal_with(us_json)
     def get(self):
         return UserStory.query.all()
+        
+    def post(self):
+        args = request.form
+        print(args)
+        r= Rol.query.get(args['rol_id'])
+        us = UserStory(r, args['quiero'], args['para'], args['obs'], args['prioridad'], args['estimacion'], args['estado_id'])
+        db.session.add(us)
+        db.session.commit()
+        return us.us_id, 201
         
 _api.add_resource(StoriesRes,'/api/user_story/')
 
