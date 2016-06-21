@@ -13,6 +13,8 @@ class AppFactoryTest(TestCase):
     
     def setUp(self):
         #arrange
+        if not os.path.exists('./tmp'): 
+            os.mkdir('./tmp')
         self.defaultDir = tempfile.mkdtemp(dir='./tmp')
         self.defaultFile = 'index.html'
         self.dbLocation = self.defaultDir + '/temp.db'
