@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 from common import _app, _api, db
 from app_factory import AppFactory

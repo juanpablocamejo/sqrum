@@ -4,13 +4,16 @@ from api.models import *
 from api.controllers import *
 
 class AppFactory:
+     
      @staticmethod
      def create_app(api, orm, dbLocation):
           #INICIALIZANDO FLASK
-          newApp = Flask(__name__)
-          newApp.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + dbLocation 
+          newApp = Flask('sqrum_app')
+          newApp.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + dbLocation
+          newApp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
           #INICIALIZANDO FLASK_RESTFUL
           api.init_app(newApp)
+          api.app = newApp
           #INICIALIZANDO SQLALCHEMY
           orm.init_app(newApp)
           orm.app = newApp
