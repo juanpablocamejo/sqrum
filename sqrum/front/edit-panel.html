@@ -19,7 +19,9 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head><body>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="js/conectar.js"></script>
+  </head><body ng-app="app">
     <div id="wrapper">
       <!-- Navigation -->
       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -160,23 +162,41 @@
           <div class="row">
             <div class="col-lg-12">
               <h1 class="page-header">SQrum
-                <small>Panel de edicion</small>
+                <small>Panel de Alta/Edición</small>
               </h1>
               <h1>Agregar UserStory</h1>
-              <form role="form">
-                <div class="form-group has-feedback">
-                  <label class="control-label" for="exampleInputEmail1">Como:</label>
-                  <input class="form-control" name="como" id="como" placeholder="Ej: Empleado" type="text">
+              <form role="form" ng-controller="MainCtrl">
+                <div class="form-group">
+                  <label class="control-label" for="como">Como:</label>
+                  <select class="form-control" name="como" id="como" ng-model="usRolId">
+                    <option ng:repeat="rol in roles" value="{{rol.id}}">{{rol.nombre}}</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label class="control-label" for="quiero">Quiero:</label>
-                  <input class="form-control" name="quiero" id="quiero" placeholder="Ej: quiero poder...." type="text">
+                  <input class="form-control" name="quiero" id="quiero" placeholder="Ej: Hacer algo...." type="text" ng-model="usQuiero">
                 </div>
                 <div class="form-group">
                   <label class="control-label" for="para">Para:</label>
-                  <input class="form-control" name="para" id="para" placeholder="telefono" type="text">
+                  <input class="form-control" name="para" id="para" placeholder="Ej: Lograr algo..." type="text" ng-model="usPara">
                 </div>
-                <button id="agregar" name="agregar" class="btn btn-primary">Agregar</button>
+                <div class="form-group">
+                  <label class="control-label" for="obs">Observaciones:</label>
+                  <input class="form-control" name="obs" id="obs" placeholder="Ej: Criterios de aceptación..." type="text" ng-model="usObs">
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="obs">estimación:</label>
+                  <input class="form-control" name="obs" id="obs" placeholder="Ej: 1,2,3,6..." type="text" ng-model="usEstimacion">
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="obs">prioridad:</label>
+                  <select class="form-control" name="obs" id="prioridad" type="text" ng-model="usPrioridad">
+                    <option value="1">Alta</option>
+                    <option value="2">Media</option>
+                    <option value="3">Baja</option>
+                  </select>
+                </div>
+                <button id="agregar" name="agregar" class="btn btn-primary" ng-click="CrearUS()">Agregar</button>
               </form>
             </div>
           </div>
