@@ -54,7 +54,7 @@ class AppFactoryTest(TestCase):
             assert c.get(self.imgRelPath).status_code == 200
     
     def test_add_test_data_and_get_data_from_db(self):
-        '''AppFactory.add_test_data | Agrega datos de prueba correctamente'''
+        '''AppFactory.add_test_data | Agrega datos de prueba'''
         #arrange
         _app = AppFactory.create_app(_api, db, self.dbLocation)
         _app.testing = True

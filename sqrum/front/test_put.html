@@ -1,0 +1,16 @@
+<html>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+    <script>
+        data = { estado_id:2, quiero:'quiero modificado', para: 'para modificado', estimacion:2, prioridad:2, obs:'obs modificadas'};
+        var ruta = '/api/user_story/2';
+        $.ajax({
+            url: ruta,
+            type: 'PUT',
+            data: data
+        }).done( function(res) {
+            document.write("PUT | '" + ruta + "' | OK<br/>");
+            document.write("DATOS ENVIADOS:" + JSON.stringify(data));
+        });
+    </script>
+</html>

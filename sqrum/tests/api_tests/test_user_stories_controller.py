@@ -96,3 +96,25 @@ class UserStoriesControllerTests(TestCase):
         assert self.resp.status_code in [200, 204]
         assert self.storiesBefore == 1
         assert self.storiesAfter == 0
+        
+    def test_put_user_story(self):
+        '''API | PUT User Story'''
+        #arrange
+        _app = AppFactory.create_app(_api, db, self.dbLocation)
+        _app.testing = True
+        AppFactory.add_test_data(db, [self.rol, self.us1])
+        self.modQuiero = "quiero modificado"
+        self.modPara = "para modificado"
+        self.modEstado = 2
+        self.data = dict(quiero=self.modQuiero, para=self.modPara, estado_id=self.modEstado)
+        #act
+        with _app.test_client() as c:
+            self.ruta = '/api/user_story/1'
+            self.resp = c.put(self.ruta, data=self.data)
+            self.modifiedUS=UserStory.query.get(1)
+        #assert
+        
+        assert self.resp.status_code in [200, 204]
+        assert self.modifiedUS.quiero == self.modQuiero
+        assert self.modifiedUS.para == self.modPara
+        assert self.modifiedUS.estado_id == self.modEstado

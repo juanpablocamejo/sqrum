@@ -22,7 +22,6 @@ class StoriesRes(Resource):
         
     def post(self):
         args = request.form
-        print(args)
         r= Rol.query.get(args['rol_id'])
         us = UserStory(r, args['quiero'], args['para'], args['obs'], args['prioridad'], args['estimacion'], 1)
         db.session.add(us)
@@ -46,6 +45,21 @@ class StoryRes(Resource):
         us = UserStory.query.get(id)
         if not us is None:
             db.session.delete(us)
+            db.session.commit()
+        return None, 204
+        
+    def put(self, id):
+        us = UserStory.query.get(id)
+        if not us is None:
+            args = request.form
+            if 'quiero' in args: us.quiero = args['quiero']
+            if 'para' in args: us.para = args['para']
+            if 'estado_id' in args: us.estado_id = args['estado_id']
+            if 'rol_id' in args: us.rol = Rol.query.get(args['rol_id'])
+            if 'obs' in args: us.observaciones = args['obs']
+            if 'estimacion' in args: us.estimacion = args['estimacion']
+            if 'prioridad' in args: us.prioridad = args['prioridad']
+            db.session.add(us)
             db.session.commit()
         return None, 204
             
