@@ -12,7 +12,6 @@ import data
 class AppFactoryTest(TestCase):
     
     def setUp(self):
-        #arrange
         if not os.path.exists('./tmp'): 
             os.mkdir('./tmp')
         self.defaultDir = tempfile.mkdtemp(dir='./tmp')
@@ -20,14 +19,15 @@ class AppFactoryTest(TestCase):
         self.dbLocation = self.defaultDir + '/temp.db'
         
     def tearDown(self):
-        os.system('sudo rm -f -r ' + self.defaultDir)
+        os.system('sudo rm -f -r ./tmp')
     
     def test_create_app_ok(self):
         '''AppFactory.create_app | Crea y vincula las instancias de APP, API y ORM'''
         _app = AppFactory.create_app(_api, db, self.dbLocation)
         #assert
-        self.assertIs(_app, db.app)
-        self.assertIs(_app, _api.app)
+        assert _app is db.app
+        assert _app is _api.app
+        assert type(_app) == Flask
         self.assertEquals(_app.config['SQLALCHEMY_DATABASE_URI'], 'sqlite:///' + self.dbLocation)
         
     def test_add_static_server_and_get_static_files_ok(self):
@@ -53,6 +53,14 @@ class AppFactoryTest(TestCase):
             assert 'Hola Sqrum' in res.data
             assert c.get(self.imgRelPath).status_code == 200
     
-    #def test_add_test_data_and_get_data_from_db(self):
-        
-        
+    def test_add_test_data_and_get_data_from_db(self):
+        '''AppFactory.add_test_data | Agrega datos de prueba correctamente'''
+        #arrange
+        _app = AppFactory.create_app(_api, db, self.dbLocation)
+        _app.testing = True
+        self.nombre_rol = "Desarrollador"
+        self.r1 = Rol(self.nombre_rol)
+        #act
+        AppFactory.add_test_data(db, [self.r1])
+        #assert
+        assert Rol.query.filter_by(nombre=self.nombre_rol).first() is self.r1

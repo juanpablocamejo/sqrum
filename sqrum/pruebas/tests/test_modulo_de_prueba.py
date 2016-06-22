@@ -1,7 +1,7 @@
 import unittest
 from pruebas.modulos.modulo_de_prueba import *
 
-@unittest.skip("Test de ejemplo con clase de prueba")
+@unittest.skip("")
 class ClaseDePruebaTest(unittest.TestCase):
     def test_saludo(self):
         ''' pruebas - ClaseDePruebaTest | Devuelve "hola SQRUM" '''

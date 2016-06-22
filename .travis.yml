@@ -9,7 +9,7 @@ before_install:
   - sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   - sudo dpkg --force-all -i google-chrome-stable_current_amd64.deb > /dev/null
 install: "pip install -r requirements.txt"
-script: xvfb-run nosetests sqrum
+script: xvfb-run nosetests -v sqrum
 branches:
   only:
     - master
