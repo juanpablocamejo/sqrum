@@ -22,8 +22,8 @@ class RolesControllerTests(TestCase):
         #arrange
         _app = AppFactory.create_app(_api, db, self.dbLocation)
         _app.testing = True
-        self.rol1 = Rol("Desarrollador")
-        self.rol2 = Rol("Administrador")
+        self.rol1 = Rol(u"Desarrollador")
+        self.rol2 = Rol(u"Administrador")
         AppFactory.add_test_data(db, [self.rol1, self.rol2])
         #act
         with _app.test_client() as c:
@@ -39,8 +39,8 @@ class RolesControllerTests(TestCase):
         #arrange
         _app = AppFactory.create_app(_api, db, self.dbLocation)
         _app.testing = True
-        self.rol1 = Rol("Desarrollador")
-        self.rol2 = Rol("Administrador")
+        self.rol1 = Rol(u"Desarrollador")
+        self.rol2 = Rol(u"Administrador")
         AppFactory.add_test_data(db, [self.rol1, self.rol2])
         #act
         with _app.test_client() as c:

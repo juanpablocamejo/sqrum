@@ -4,7 +4,7 @@ from api.models import *
 
 #JSON
 us_json = {
-    'us_id': fields.Integer,
+    'id': fields.Integer,
     'rol.nombre': fields.String,
     'rol_id': fields.Integer,
     'quiero': fields.String,
@@ -24,10 +24,11 @@ class StoriesRes(Resource):
         args = request.form
         print(args)
         r= Rol.query.get(args['rol_id'])
-        us = UserStory(r, args['quiero'], args['para'], args['obs'], args['prioridad'], args['estimacion'], args['estado_id'])
+        us = UserStory(r, args['quiero'], args['para'], args['obs'], args['prioridad'], args['estimacion'], 1)
         db.session.add(us)
         db.session.commit()
-        return us.us_id, 201
+        return {'id': us.id}, 201
+        
         
 _api.add_resource(StoriesRes,'/api/user_story/')
 
@@ -41,4 +42,12 @@ class StoryRes(Resource):
         else:
             return UserStory.query.get(id)
             
+    def delete(self, id):
+        us = UserStory.query.get(id)
+        if not us is None:
+            db.session.delete(us)
+            db.session.commit()
+        return None, 204
+            
 _api.add_resource(StoryRes, '/api/user_story/<int:id>')
+

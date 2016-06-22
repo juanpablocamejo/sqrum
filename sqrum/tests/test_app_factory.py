@@ -58,7 +58,7 @@ class AppFactoryTest(TestCase):
         #arrange
         _app = AppFactory.create_app(_api, db, self.dbLocation)
         _app.testing = True
-        self.nombre_rol = "Desarrollador"
+        self.nombre_rol = u"Desarrollador"
         self.r1 = Rol(self.nombre_rol)
         #act
         AppFactory.add_test_data(db, [self.r1])

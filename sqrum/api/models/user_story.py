@@ -1,12 +1,12 @@
 from common import db
 
 class UserStory(db.Model):
-    us_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     rol_id = db.Column(db.Integer, db.ForeignKey('rol.id'))
     rol = db.relationship('Rol')
-    quiero = db.Column(db.String(500), nullable=False)
-    para = db.Column(db.String(500))
-    observaciones = db.Column(db.String(1000))
+    quiero = db.Column(db.Unicode(500), nullable=False)
+    para = db.Column(db.Unicode(500))
+    observaciones = db.Column(db.Unicode(1000))
     estado_id = db.Column(db.Integer, nullable=False)
     prioridad = db.Column(db.Integer)
     estimacion = db.Column(db.Integer)
