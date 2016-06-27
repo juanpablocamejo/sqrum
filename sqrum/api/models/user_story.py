@@ -19,4 +19,4 @@ class UserStory(db.Model):
         self.prioridad = prioridad
         self.estimacion = estimacion
         self.estado_id = estado_id
-        
+        self.observaciones = obs

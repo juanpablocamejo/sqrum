@@ -165,35 +165,32 @@
                 <small>Panel de Alta/Edición</small>
               </h1>
               <h1>Agregar UserStory</h1>
-              <form role="form" ng-controller="MainCtrl">
+              <form role="form" name="form" ng-controller="AltaUserStoryCtrl">
                 <div class="form-group">
                   <label class="control-label" for="como">Como:</label>
-                  <select class="form-control" name="como" id="como" ng-model="usRolId">
-                    <option ng:repeat="rol in roles" value="{{rol.id}}">{{rol.nombre}}</option>
+                  <select class="form-control" name="como" id="como" ng-options="rol.nombre for rol in roles track by rol.id" ng-model="dto.rol_id">
+                    <option value="">Seleccione...</option>
                   </select>
                 </div>
                 <div class="form-group">
                   <label class="control-label" for="quiero">Quiero:</label>
-                  <input class="form-control" name="quiero" id="quiero" placeholder="Ej: Hacer algo...." type="text" ng-model="usQuiero">
+                  <input class="form-control" name="quiero" id="quiero" placeholder="Ej: Hacer algo...." type="text" ng-model="dto.quiero">
                 </div>
                 <div class="form-group">
                   <label class="control-label" for="para">Para:</label>
-                  <input class="form-control" name="para" id="para" placeholder="Ej: Lograr algo..." type="text" ng-model="usPara">
+                  <input class="form-control" name="para" id="para" placeholder="Ej: Lograr algo..." type="text" ng-model="dto.para">
                 </div>
                 <div class="form-group">
                   <label class="control-label" for="obs">Observaciones:</label>
-                  <input class="form-control" name="obs" id="obs" placeholder="Ej: Criterios de aceptación..." type="text" ng-model="usObs">
+                  <input class="form-control" name="obs" id="obs" placeholder="Ej: Criterios de aceptación..." type="text" ng-model="dto.obs">
                 </div>
                 <div class="form-group">
-                  <label class="control-label" for="obs">estimación:</label>
-                  <input class="form-control" name="obs" id="obs" placeholder="Ej: 1,2,3,6..." type="text" ng-model="usEstimacion">
+                  <label class="control-label" for="estimacion">estimación:</label>
+                  <input class="form-control" name="estimacion" id="estimacion" placeholder="Ej: 1,2,3,6..." type="number" ng-model="dto.estimacion" required>
                 </div>
                 <div class="form-group">
-                  <label class="control-label" for="obs">prioridad:</label>
-                  <select class="form-control" name="obs" id="prioridad" type="text" ng-model="usPrioridad">
-                    <option value="1">Alta</option>
-                    <option value="2">Media</option>
-                    <option value="3">Baja</option>
+                  <label class="control-label" for="prioridad">prioridad:</label>
+                  <select class="form-control" name="prioridad" id="prioridad" ng-model="dto.prioridad" ng-options="p.nombre for p in prioridades track by p.id">
                   </select>
                 </div>
                 <button id="agregar" name="agregar" class="btn btn-primary" ng-click="CrearUS()">Agregar</button>

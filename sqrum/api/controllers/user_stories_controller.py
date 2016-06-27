@@ -5,13 +5,13 @@ from api.models import *
 #JSON
 us_json = {
     'id': fields.Integer,
-    'rol.nombre': fields.String,
     'rol_id': fields.Integer,
     'quiero': fields.String,
     'para': fields.String,
     'estado_id': fields.Integer,
     'estimacion': fields.Integer,
-    'prioridad': fields.Integer
+    'prioridad': fields.Integer,
+    'observaciones': fields.String
 }
 
 #Recursos
@@ -54,8 +54,8 @@ class StoryRes(Resource):
             args = request.form
             if 'quiero' in args: us.quiero = args['quiero']
             if 'para' in args: us.para = args['para']
-            if 'estado_id' in args: us.estado_id = args['estado_id']
-            if 'rol_id' in args: us.rol = Rol.query.get(args['rol_id'])
+            if 'estado' in args: us.estado_id = args['estado']
+            if 'rol' in args: us.rol = Rol.query.get(args['rol'])
             if 'obs' in args: us.observaciones = args['obs']
             if 'estimacion' in args: us.estimacion = args['estimacion']
             if 'prioridad' in args: us.prioridad = args['prioridad']

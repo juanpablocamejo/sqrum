@@ -1,59 +1,173 @@
 var app = angular.module('app', [], function($httpProvider) {
-  // Use x-www-form-urlencoded Content-Type
-  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+    // Use x-www-form-urlencoded Content-Type
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 });
 
-function MainCtrl($scope, $http) {
-$scope.newUS = {rol_id:1, prioridad:1};
-$scope.us = [];
-$scope.roles=[];
-$http.get('/api/user_story/').success(function(data){
-            $scope.us = data;
-            console.log(data)
-        }).error(function(data) {
-            console.log('Error: ' + data);
-        });
-$http.get('/api/rol/').success(function(data){
-        console.log({roles:data});
-        $scope.roles = data;
-    }).error(function(data) {
-            console.log('Error: ' + data);
-        });
-
-function $$Post(url,dto){
-    var req = { method: 'POST', url: url, data: dto, headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    transformRequest: function(obj) {
-      var str = [];
-      for(var p in obj)
-      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-      return str.join("&");
-    } };
+/// SERVICIOS
+app.service('DATA', function() {
+    this.prioridades = [
+        { id: "1", nombre: "Baja"}, 
+        { id: "2", nombre: "Normal" }, 
+        { id: "3", nombre: "Alta" }
+    ];
+    this.estados = [
+        { id: "1", nombre: "Pendiente"}, 
+        { id: "2", nombre: "En desarrollo"}, 
+        { id: "3", nombre: "Terminado" },
+        { id: "4", nombre: "Validado" }
+    ];
+});
+app.service('API', function($http) {
     
-    return $http(req);
-}
+    function submit(url, dto, type) {
+        var req = {
+            method: type,
+            url: url,
+            data: dto,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            transformRequest: function(obj) {
+                var str = [];
+                for (var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            }
+        };
 
-$scope.CrearUS = function() {
-    var dto = {
-        rol_id: $scope.usRolId,
-        estado_id: 1,
-        quiero: $scope.usQuiero,
-        para: $scope.usPara,
-        estimacion: $scope.usEstimacion,
-        prioridad: $scope.usPrioridad,
-        obs: $scope.usObs
+        return $http(req);
+    }
+    
+    this.GET = function(res) {
+        return $http.get(res);
+    }
+
+    this.POST = function(url, dto) {
+        return submit(url, dto, 'POST');
+    }
+
+    this.PUT = function(url, dto) {
+        return submit(url, dto, 'PUT');
+    }
+
+    this.DELETE = function(url) {
+        var req = {
+            method: 'DELETE',
+            url: url,
+        };
+        return $http(req);
     };
-    $$Post('/api/user_story/', dto).success(
-        function() {
-            console.log('POST OK');
-        }).error(function(data) {
-        console.log('Error: ' + data);
+});
+
+//Funciones de carga desde la API
+function CargarRoles(API, scp, key) {
+    return API.GET('/api/rol').then(function(resp) {
+        scp[key] = resp.data;
     });
-};
 }
 
+function CargarStories(API, scp, key) {
+    return API.GET('/api/user_story/').then(function(resp) {
+         scp[key] = ngDTO(resp.data,scp);
+    });
+}
 
+/// CONTROLLERS
+function TableroCtrl($scope, API, DATA) {
+    $scope.prioridades = DATA.prioridades;
+    $scope.estados = DATA.estados;
+    CargarRoles(API, $scope, "roles").then(function(){
+        CargarStories(API, $scope, "us");
+    });
+    
+    $scope.editUS = function(u){
+        API.PUT('/api/user_story/' + u.id,apiDTO(u)).then(
+            function(){ console.log('EDIT US N°' + u.id +': -> OK');},
+            function(resp){ console.log('EDIT US -> ERROR:');console.log(resp);}
+        )
+    };
+    
+    $scope.deleteUS = function(i, us_id){
+        if (confirm("¿Está seguro de eliminar la User Story?")){
+        API.DELETE('/api/user_story/' + us_id).then(
+            function(){ console.log('DELETE US N°' + us_id +': -> OK'); $scope.us.splice(i,1);},
+            function(resp){ console.log('DELETE US N°' + us_id +'-> ERROR:');console.log(resp);}
+        );
+        }
+    };
+}
 
-app.controller('MainCtrl', MainCtrl);
+app.controller('TableroCtrl', TableroCtrl);
 
+function AltaUserStoryCtrl($scope, API, DATA) {
+    $scope.prioridades = DATA.prioridades;
+    //$scope.estados = sqDATA.estados;
+    CargarRoles(API, $scope, "roles");
 
+    //Selección inicial
+    $scope.dto = {
+        rol_id: {
+            id: '',
+            nombre: 'Seleccione...'
+        },
+        prioridad: $scope.prioridades[1]
+    };
 
+    $scope.CrearUS = function() {
+        API.POST("api/user_story/", apiDTO($scope.dto))
+            .then(function(resp) {
+                    alert("User Story n° " + resp.data.id + " creada correctamente.");
+                },
+                function(resp) {
+                    alert("Error al intentar crear la User Story." + JSON.stringify(resp.data));
+                }
+            );
+    };
+}
+app.controller('AltaUserStoryCtrl', AltaUserStoryCtrl);
+
+//FUNCIONES AUXILIARES
+
+function apiDTO(obj) {
+    var res = {}
+    for (var k in obj) {
+        if (typeof(obj[k]) == "object" && "id" in obj[k]) {
+            res[k] = obj[k].id;
+        }
+        else {
+            res[k] = obj[k];
+        }
+    }
+    return res;
+}
+
+// reemplaza los miembros de un apiDTO que sean IDs, por el json de la forma {id: nombre:}.
+// para facilitar el binding bidireccional de los campos tipo "select".
+function ngDTO(obj, scp) {
+    if (angular.isArray(obj)){ return ngDTOArr(obj,scp);}
+    var res = {};
+    for (var k in obj) {
+       switch(k){
+            case "estado_id":
+                res['estado'] = scp.estados[obj[k]-1];
+                break;
+            case "rol_id":
+                res['rol'] = scp.roles[obj[k]-1];
+                break;
+            case "prioridad":
+                res['prioridad'] = scp.prioridades[obj[k]-1];
+                break;
+            default:
+                res[k] = obj[k];
+            }
+    }
+    return res;
+}
+
+function ngDTOArr(arr,scp){
+    var res = [];
+    for (var i in arr){
+        res[i] = ngDTO(arr[i],scp);
+    }
+    return res;
+}
