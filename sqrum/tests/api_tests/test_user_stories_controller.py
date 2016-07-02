@@ -30,12 +30,12 @@ class UserStoriesControllerTests(unittest.TestCase):
         with _app.test_client() as c:
             self.ruta = '/api/user_story/' + str(self.us1.id)
             self.resp = c.get(self.ruta)
-        #assert
-        assert self.resp.status_code == 200
-        assert json.loads(self.resp.data)['id']==self.us1.id
-        assert json.loads(self.resp.data)['quiero']==self.us1.quiero
-        assert json.loads(self.resp.data)['para']==self.us1.para
-        #assert json.loads(self.resp.data)['rol_id']==self.rol.id
+        #asserts
+            assert self.resp.status_code == 200
+            assert json.loads(self.resp.data)['id']==self.us1.id
+            assert json.loads(self.resp.data)['quiero']==self.us1.quiero
+            assert json.loads(self.resp.data)['para']==self.us1.para
+            assert json.loads(self.resp.data)['rol_id']==self.rol.id
         
     def test_get_user_stories(self):
         '''API | GET User Stories'''
@@ -47,15 +47,15 @@ class UserStoriesControllerTests(unittest.TestCase):
         with _app.test_client() as c:
             self.ruta = '/api/user_story/'
             self.resp = c.get(self.ruta)
-        #assert
-        assert self.resp.status_code == 200
-        assert len(json.loads(self.resp.data))==2
-        assert json.loads(self.resp.data)[0]['id'] == self.us1.id
-        assert json.loads(self.resp.data)[1]['id'] == self.us2.id
-        assert json.loads(self.resp.data)[0]['quiero'] == self.us1.quiero
-        assert json.loads(self.resp.data)[1]['quiero'] == self.us2.quiero
-        # assert json.loads(self.resp.data)[0]['rol_id'] == self.rol.id
-        # assert json.loads(self.resp.data)[1]['rol_id'] == self.rol.id
+        #asserts
+            assert self.resp.status_code == 200
+            assert len(json.loads(self.resp.data))==2
+            assert json.loads(self.resp.data)[0]['id'] == self.us1.id
+            assert json.loads(self.resp.data)[1]['id'] == self.us2.id
+            assert json.loads(self.resp.data)[0]['quiero'] == self.us1.quiero
+            assert json.loads(self.resp.data)[1]['quiero'] == self.us2.quiero
+            assert json.loads(self.resp.data)[0]['rol_id'] == self.rol.id
+            assert json.loads(self.resp.data)[1]['rol_id'] == self.rol.id
         
     def test_post_user_story(self):
         '''API | POST User Story'''
@@ -71,13 +71,13 @@ class UserStoriesControllerTests(unittest.TestCase):
             self.resp = c.post(self.ruta, data=self.data)
             self.jsonResp = json.loads(self.resp.data)
             self.createdUS=UserStory.query.get(1)
-        #assert
-        assert self.resp.status_code == 201
-        assert self.jsonResp['id'] == 1
-        assert self.createdUS.quiero == self.us1.quiero
-        assert self.createdUS.para == self.us1.para
-        assert self.createdUS.estimacion == self.us1.estimacion
-        assert self.createdUS.prioridad == self.us1.prioridad
+        #asserts
+            assert self.resp.status_code == 201
+            assert self.jsonResp['id'] == 1
+            assert self.createdUS.quiero == self.us1.quiero
+            assert self.createdUS.para == self.us1.para
+            assert self.createdUS.estimacion == self.us1.estimacion
+            assert self.createdUS.prioridad == self.us1.prioridad
         
     def test_delete_user_story(self):
         '''API | DELETE User Story'''
@@ -91,11 +91,10 @@ class UserStoriesControllerTests(unittest.TestCase):
             self.storiesBefore = len(json.loads(c.get('/api/user_story/').data))
             self.resp = c.delete(self.ruta)
             self.storiesAfter = len(json.loads(c.get('/api/user_story/').data))
-            
-        #assert
-        assert self.resp.status_code in [200, 204]
-        assert self.storiesBefore == 1
-        assert self.storiesAfter == 0
+        #asserts
+            assert self.resp.status_code in [200, 204]
+            assert self.storiesBefore == 1
+            assert self.storiesAfter == 0
         
     def test_put_user_story(self):
         '''API | PUT User Story'''
@@ -112,9 +111,8 @@ class UserStoriesControllerTests(unittest.TestCase):
             self.ruta = '/api/user_story/1'
             self.resp = c.put(self.ruta, data=self.data)
             self.modifiedUS=UserStory.query.get(1)
-        #assert
-        
-        assert self.resp.status_code in [200, 204]
-        assert self.modifiedUS.quiero == self.modQuiero
-        assert self.modifiedUS.para == self.modPara
-        assert self.modifiedUS.estado_id == self.modEstado
+        #asserts
+            assert self.resp.status_code in [200, 204]
+            assert self.modifiedUS.quiero == self.modQuiero
+            assert self.modifiedUS.para == self.modPara
+            assert self.modifiedUS.estado_id == self.modEstado

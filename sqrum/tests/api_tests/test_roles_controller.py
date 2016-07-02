@@ -29,10 +29,10 @@ class RolesControllerTests(TestCase):
         with _app.test_client() as c:
             self.ruta = '/api/rol/' + str(self.rol1.id)
             self.resp = c.get(self.ruta)
-        #assert
-        assert self.resp.status_code == 200
-        assert json.loads(self.resp.data)['id']==self.rol1.id
-        assert json.loads(self.resp.data)['nombre']==self.rol1.nombre
+        #asserts
+            assert self.resp.status_code == 200
+            assert json.loads(self.resp.data)['id']==self.rol1.id
+            assert json.loads(self.resp.data)['nombre']==self.rol1.nombre
     
     def test_get_roles(self):
         '''API | GET Roles'''
@@ -46,8 +46,8 @@ class RolesControllerTests(TestCase):
         with _app.test_client() as c:
             self.ruta = '/api/rol/'
             self.resp = c.get(self.ruta)
-        #assert
-        assert self.resp.status_code == 200
-        assert len(json.loads(self.resp.data))==2
-        assert json.loads(self.resp.data)[0]['id'] == self.rol1.id
-        assert json.loads(self.resp.data)[1]['id'] == self.rol2.id
+        #asserts
+            assert self.resp.status_code == 200
+            assert len(json.loads(self.resp.data))==2
+            assert json.loads(self.resp.data)[0]['id'] == self.rol1.id
+            assert json.loads(self.resp.data)[1]['id'] == self.rol2.id
