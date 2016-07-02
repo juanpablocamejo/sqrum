@@ -117,6 +117,7 @@ function AltaUserStoryCtrl($scope, API, DATA) {
         API.POST("api/user_story/", apiDTO($scope.dto))
             .then(function(resp) {
                     alert("User Story n° " + resp.data.id + " creada correctamente.");
+                    location.reload();
                 },
                 function(resp) {
                     alert("Error al intentar crear la User Story." + JSON.stringify(resp.data));
