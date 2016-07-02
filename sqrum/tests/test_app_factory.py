@@ -22,7 +22,7 @@ class AppFactoryTest(TestCase):
         os.system('sudo rm -f -r ./tmp')
     
     def test_create_app_ok(self):
-        '''AppFactory.create_app | Crea y vincula las instancias de APP, API y ORM'''
+        '''CONFIG | Crea y vincula las instancias de APP, API y ORM'''
         _app = AppFactory.create_app(_api, db, self.dbLocation)
         #assert
         assert _app is db.app
@@ -31,7 +31,7 @@ class AppFactoryTest(TestCase):
         self.assertEquals(_app.config['SQLALCHEMY_DATABASE_URI'], 'sqlite:///' + self.dbLocation)
         
     def test_add_static_server_and_get_static_files_ok(self):
-        '''AppFactory.add_static_server | Sirve contenido estático de la carpeta y archivo por defecto en "/"'''
+        '''CONFIG | Configura ruta raíz y carpeta con contenido estático'''
         #arrange
         _app = AppFactory.create_app(_api, db, self.dbLocation)
         _app.testing = True
@@ -54,7 +54,7 @@ class AppFactoryTest(TestCase):
             assert c.get(self.imgRelPath).status_code == 200
     
     def test_add_test_data_and_get_data_from_db(self):
-        '''AppFactory.add_test_data | Agrega datos de prueba'''
+        '''CONFIG | Agrega datos de prueba'''
         #arrange
         _app = AppFactory.create_app(_api, db, self.dbLocation)
         _app.testing = True
