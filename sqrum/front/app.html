@@ -74,12 +74,20 @@
     .tablero .container-fluid {
       border-collapse: collapse;
       border: 0;
-      padding: 0px;
+      padding: 1px;
     }
     .us-card #eliminar{
       padding:3px 4px 3px 4px !important;
       margin-bottom:4px !important;
     }
+    
+    .us-card .form-inline label{
+      font-size: 7.5pt!important;
+    }
+    .tablero{
+      min-width:500px !important;
+    }
+
   </style>
 </head>
 
@@ -231,7 +239,7 @@
         </div>
 
         <div class="row tablero " ng-controller="TableroCtrl">
-          <div ng-repeat="u in us" class="container col-xs-6 col-sm-6 col-md-4 col-lg-4" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }">
+          <div ng-repeat="u in us" class="container col-xs-9 col-sm-6 col-md-4 col-lg-4" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }">
             <div class="us-card panel panel-primary">
               <span id="eliminar"   id="eliminar" >
                 <a class="label label-sm label-danger pull-right" ng-click="deleteUS($index,u.id)">x</a>
@@ -256,18 +264,19 @@
                 </div>
               </div>
               <div class="form-inline">
-                  <div class="form-group col-lg-3 col-md-3 col-sm-3">
+                  <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12 estimacion" >
                     <label for="estimacion">Estimación:</label><br/>
                     <input ng-change="editUS(u)" class="form-control" type="number" ng-model="u.estimacion" />
                   </div>
-                  <div class="form-group col-lg-5 col-md-5 col-sm-5">
-                    <label for="estado">Estado:</label><br/>
-                    <select id="estado" ng-change="editUS(u)" class="form-control" ng-options="e.nombre for e in estados track by e.id" ng-model="u.estado"></select>
-                  </div>
-                  <div class="form-group col-lg-4 col-md-4 col-sm-4">
+                  <div class="form-group col-lg-4 col-md-8 col-sm-8 col-xs-12">
                     <label for="prioridad">Prioridad:</label><br/>
                     <select id="prioridad" ng-change="editUS(u)" class="form-control" ng-options="p.nombre for p in prioridades track by p.id" ng-model="u.prioridad"></select>
                   </div>
+                  <div class="form-group col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                    <label for="estado">Estado:</label><br/>
+                    <select id="estado" ng-change="editUS(u)" class="form-control" ng-options="e.nombre for e in estados track by e.id" ng-model="u.estado"></select>
+                  </div>
+
                 </div>
                 </div>
             </div>
