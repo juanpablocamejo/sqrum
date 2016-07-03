@@ -142,29 +142,19 @@ function AltaRolesCtrl($scope, API) {
 }
 app.controller('AltaRolesCtrl', AltaRolesCtrl);
 
-function CargarStories(API, scp, key) {
-    return API.GET('/api/user_story/').then(function(resp) {
-         scp[key] = ngDTO(resp.data,scp);
-    });
-}
-
 /// CONTROLLERS
 function TableroRolesCtrl($scope, API, DATA) {
-    $scope.prioridades = DATA.prioridades;
-    $scope.estados = DATA.estados;
-    CargarRoles(API, $scope, "roles").then(function(){
-        CargarStories(API, $scope, "us");
-    });
+    CargarRoles(API, $scope, "roles");
     
     $scope.editRoles = function(u){
-        API.PUT('/api/user_story/' + u.id,apiDTO(u)).then(
+        API.PUT('/api/rol/' + u.id,apiDTO(u)).then(
             function(){ console.log('EDIT ROL N°' + u.id +': -> OK');},
             function(resp){ console.log('EDIT ROL -> ERROR:');console.log(resp);}
         )
     };
     
     $scope.deleteRoles = function(i, rol_id){
-        if (confirm("¿Está seguro de eliminar la User Story?")){
+        if (confirm("¿Está seguro de eliminar el rol?")){
         API.DELETE('/api/rol/' + rol_id).then(
             function(){ console.log('DELETE ROL N°' + rol_id +': -> OK'); $scope.us.splice(i,1);},
             function(resp){ console.log('DELETE ROL N°' + rol_id +'-> ERROR:');console.log(resp);}
@@ -173,7 +163,6 @@ function TableroRolesCtrl($scope, API, DATA) {
     };
 }
 app.controller('TableroRolesCtrl', TableroRolesCtrl);
-
 
 //FUNCIONES AUXILIARES
 

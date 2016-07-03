@@ -91,7 +91,7 @@
   </style>
 </head>
 
-<body ng-controller="TableroCtrl">
+<body ng-controller="TableroRolesCtrl">
   <div id="wrapper">
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -243,7 +243,23 @@
               </form>
           </div>
         </div>
-
+        <div class="row tablero " ng-controller="TableroRolesCtrl">
+          <div ng-repeat="r in roles" class="container col-xs-9 col-sm-6 col-md-4 col-lg-4" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }">
+            <div class="us-card panel panel-primary">
+              <span id="eliminar"   id="eliminar" >
+                <a class="label label-sm label-danger pull-right" ng-click="deleteRoles($index,r.id)">x</a>
+              </span>
+              <div class="container-fluid">
+              <div class="form">
+                <div class="form-group">
+                  <label for="rol">Rol:</label>
+                  <input id="rol" ng-change="editRoles(r)" class="form-control" ng-model="r.nombre"></input>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
         
         <!-- /.row -->
       </div>
