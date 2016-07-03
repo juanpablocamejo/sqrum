@@ -3,6 +3,14 @@ var app = angular.module('app', [], function($httpProvider) {
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 });
 
+app.directive('menu', function() {
+  return {
+    restrict: 'E',
+    templateUrl:"menu.html"
+  };
+});
+
+
 /// SERVICIOS
 app.service('DATA', function() {
     this.prioridades = [

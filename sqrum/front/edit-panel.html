@@ -25,184 +25,60 @@
   <body ng-app="app">
     <div id="wrapper">
       <!-- Navigation -->
-      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">SQrum</a>
-        </div>
-        <!-- Top Menu Items -->
-        <ul class="nav navbar-right top-nav">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-            <ul class="dropdown-menu message-dropdown">
-              <li class="message-preview">
-                <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-              </li>
-              <li class="message-preview">
-                <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-              </li>
-              <li class="message-preview">
-                <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">
-                                            <strong>John Smith</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-              </li>
-              <li class="message-footer">
-                <a href="#">Read All New Messages</a>
-              </li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-            <ul class="dropdown-menu alert-dropdown">
-              <li>
-                <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-              </li>
-              <li>
-                <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-              </li>
-              <li>
-                <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-              </li>
-              <li>
-                <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-              </li>
-              <li>
-                <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-              </li>
-              <li>
-                <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <a href="#">View All</a>
-              </li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Desarrollador <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-              </li>
-              <li>
-                <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-              </li>
-              <li>
-                <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <!-- Sidebar Menu Items - These collapse to the responsive navigation
-        menu on small screens -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <ul class="nav navbar-nav side-nav">
-            <li>
-              <a href="app.html"><i class="fa fa-fw fa-dashboard"></i> Tablero</a>
-            </li>
-            <li>
-              <a href="roles.html"><i class="fa fa-fw fa-users"></i> Roles</a>
-            </li>
-            <li class="active">
-              <a href="edit-panel.html"><i class="fa fa-fw fa-edit"></i> Agregar/eliminar U.S</a>
-            </li>
-          </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-      </nav>
+      <menu></menu>
       <div id="page-wrapper">
         <div class="container-fluid">
           <!-- Page Heading -->
           <div class="row">
             <div class="col-lg-12">
-              <h1 class="page-header">SQrum
-                <small>Panel de Alta/Edición</small>
-              </h1>
+              <h2 class="page-header">SQrum
+                <small>Agregar User Story</small>
+              </h2>
             </div>
-              <div class="row">
-              <div class="col-md-4">
-              <h1>Agregar UserStory</h1>
-              <form role="form" name="form" ng-controller="AltaUserStoryCtrl">
-                <div class="form-group">
-                  <label class="control-label" for="como">Como:</label>
-                  <select class="form-control" name="como" id="como" ng-options="rol.nombre for rol in roles track by rol.id" ng-model="dto.rol_id">
-                    <option value="">Seleccione...</option>
-                  </select>
+            </div>
+            <div class="row">
+              <div class="container-fluid">
+                <div class="col-xs-12 col-sm-10 col-ms-9 col-lg-7">
+                <div class="panel panel-primary" style="background-color:#E4EAF0!important;">
+                  <!--<div class="panel-heading">-->
+                  <!--  <span>Nueva User Story</span>-->
+                  <!--</div>-->
+                  <div class="panel-body">
+                    <form class="form form-compact" name="form" ng-controller="AltaUserStoryCtrl">
+                      <div class="form-group">
+                        <label class="control-label" for="como">Como:</label>
+                        <select class="form-control" name="como" id="como" ng-options="rol.nombre for rol in roles track by rol.id" ng-model="dto.rol_id">
+                                <option value="">Seleccione...</option>
+                              </select>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label" for="quiero">Quiero:</label>
+                        <textarea class="form-control" name="quiero" id="quiero" placeholder="Ej: Hacer algo...." type="text" ng-model="dto.quiero"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label" for="para">Para:</label>
+                        <textarea class="form-control" name="para" id="para" placeholder="Ej: Lograr algo..." type="text" ng-model="dto.para"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label" for="obs">Observaciones:</label>
+                        <input class="form-control" name="obs" id="obs" placeholder="Ej: Criterios de aceptación..." type="text" ng-model="dto.obs">
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label" for="estimacion">estimación:</label>
+                        <input class="form-control" name="estimacion" id="estimacion" placeholder="Ej: 1,2,3,6..." type="number" ng-model="dto.estimacion" required>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label" for="prioridad">prioridad:</label>
+                        <select class="form-control" name="prioridad" id="prioridad" ng-model="dto.prioridad" ng-options="p.nombre for p in prioridades track by p.id">
+                              </select>
+                      </div>
+                      <button id="agregar" name="agregar" class="btn btn-primary center-block" ng-click="CrearUS()">Agregar</button>
+                    </form>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label class="control-label" for="quiero">Quiero:</label>
-                  <textarea class="form-control" name="quiero" id="quiero" placeholder="Ej: Hacer algo...." type="text" ng-model="dto.quiero"></textarea>
                 </div>
-                <div class="form-group">
-                  <label class="control-label" for="para">Para:</label>
-                  <textarea class="form-control" name="para" id="para" placeholder="Ej: Lograr algo..." type="text" ng-model="dto.para"></textarea>
-                </div>
-                <div class="form-group">
-                  <label class="control-label" for="obs">Observaciones:</label>
-                  <input class="form-control" name="obs" id="obs" placeholder="Ej: Criterios de aceptación..." type="text" ng-model="dto.obs">
-                </div>
-                <div class="form-group">
-                  <label class="control-label" for="estimacion">estimación:</label>
-                  <input class="form-control" name="estimacion" id="estimacion" placeholder="Ej: 1,2,3,6..." type="number" ng-model="dto.estimacion" required>
-                </div>
-                <div class="form-group">
-                  <label class="control-label" for="prioridad">prioridad:</label>
-                  <select class="form-control" name="prioridad" id="prioridad" ng-model="dto.prioridad" ng-options="p.nombre for p in prioridades track by p.id">
-                  </select>
-                </div>
-                <button id="agregar" name="agregar" class="btn btn-primary" ng-click="CrearUS()">Agregar</button>
-              </form>
               </div>
-              <div class="col-md-4"></div>
-              <div class="col-md-4"></div>
-</div>
+            </div>
             
           </div>
           <!-- /.row -->
