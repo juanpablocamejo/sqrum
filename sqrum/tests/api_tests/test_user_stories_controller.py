@@ -14,6 +14,7 @@ class UserStoriesControllerTests(unittest.TestCase):
         self.defaultFile = 'index.html'
         self.dbLocation = self.defaultDir + '/temp.db'
         self.rol = Rol(u"Desarrollador")
+        self.des1 = Desarrollador(u"Juan")
         self.us1 = UserStory(self.rol, u'Agregar una User Story', para=u'Agregar funcionalidad al sistema', obs=u'Observaciones', prioridad=1, estimacion=2)
         self.us2 = UserStory(self.rol, u'Cambiar el estado a una user story', para=u'Registrar lo que hago como desarrollador y que sea visible al resto del equipo', obs=u'Observaciones', prioridad=1, estimacion=2)
 
@@ -101,11 +102,12 @@ class UserStoriesControllerTests(unittest.TestCase):
         #arrange
         _app = AppFactory.create_app(_api, db, self.dbLocation)
         _app.testing = True
-        AppFactory.add_test_data(db, [self.rol, self.us1])
+        AppFactory.add_test_data(db, [self.rol, self.us1, self.des1])
         self.modQuiero = "quiero modificado"
         self.modPara = "para modificado"
         self.modEstado = 2
-        self.data = dict(quiero=self.modQuiero, para=self.modPara, estado=self.modEstado)
+        self.modDesarrollador = self.des1.id
+        self.data = dict(quiero=self.modQuiero, para=self.modPara, estado=self.modEstado, desarrollador=self.modDesarrollador)
         #act
         with _app.test_client() as c:
             self.ruta = '/api/user_story/1'
@@ -116,3 +118,4 @@ class UserStoriesControllerTests(unittest.TestCase):
             assert self.modifiedUS.quiero == self.modQuiero
             assert self.modifiedUS.para == self.modPara
             assert self.modifiedUS.estado_id == self.modEstado
+            assert self.modifiedUS.desarrollador.id == self.modDesarrollador

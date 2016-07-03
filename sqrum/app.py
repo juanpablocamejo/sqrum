@@ -11,4 +11,7 @@ if __name__ == '__main__':
      AppFactory.add_static_server(_app,'front', 'index.html')
      AppFactory.add_test_data(db, data.roles)
      AppFactory.add_test_data(db, data.stories)
+     AppFactory.add_test_data(db, data.desarrolladores)
+     AppFactory.add_test_data(db, data.iteraciones)
      _app.run(port=port, host=host, debug=True)
+     

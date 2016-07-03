@@ -10,6 +10,10 @@ class UserStory(db.Model):
     estado_id = db.Column(db.Integer, nullable=False)
     prioridad = db.Column(db.Integer)
     estimacion = db.Column(db.Integer)
+    desarrollador_id = db.Column(db.Integer, db.ForeignKey('desarrollador.id'))
+    desarrollador = db.relationship('Desarrollador')
+    iteracion = db.relationship('Iteracion')
+    iteracion_id = db.Column(db.Integer, db.ForeignKey('iteracion.id'))
 
     def __init__(self, rol, quiero, para=None, obs=None, prioridad=None, estimacion=None, estado_id=1):
         self.rol = rol
@@ -20,3 +24,5 @@ class UserStory(db.Model):
         self.estimacion = estimacion
         self.estado_id = estado_id
         self.observaciones = obs
+        self.desarrollador = None
+        self.iteracion = None

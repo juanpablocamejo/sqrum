@@ -11,7 +11,8 @@ us_json = {
     'estado_id': fields.Integer,
     'estimacion': fields.Integer,
     'prioridad': fields.Integer,
-    'observaciones': fields.String
+    'observaciones': fields.String,
+    'desarrollador_id': fields.Integer
 }
 
 #Recursos
@@ -59,6 +60,8 @@ class StoryRes(Resource):
             if 'obs' in args: us.observaciones = args['obs']
             if 'estimacion' in args: us.estimacion = args['estimacion']
             if 'prioridad' in args: us.prioridad = args['prioridad']
+            if 'desarrollador' in args: us.desarrollador = Desarrollador.query.get(args['desarrollador'])
+            if 'iteracion' in args: us.iteracion = Iteracion.query.get(args['iteracion'])
             db.session.add(us)
             db.session.commit()
         return None, 204
