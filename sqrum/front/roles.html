@@ -91,7 +91,7 @@
   </style>
 </head>
 
-<body ng-controller="TableroCtrl">
+<body ng-controller="TableroRolesCtrl">
   <div id="wrapper">
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -213,10 +213,10 @@
         menu on small screens -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-          <li class="active">
+          <li>
             <a href="app.html"><i class="fa fa-fw fa-dashboard"></i> Tablero</a>
           </li>
-          <li>
+          <li class="active">
             <a href="roles.html"><i class="fa fa-fw fa-users"></i> Roles</a>
           </li>
           <li>
@@ -232,57 +232,35 @@
         <div class="row">
           <div class="col-lg-12">
             <h2 class="page-header">SQrum
-                <small>Tablero</small>
+                <small>Roles</small>
               </h2>
-            <h3>Users Stories</h3>
+            <form class="form-inline" name="form" ng-controller="AltaRolesCtrl">
+                <div class="form-group">
+                  <label class="control-label" for="como">Crear Rol:</label>
+                  <input class="form-control" name="rol" id="rol" placeholder="Ej: Administrador" type="text" ng-model="dto.nombre">
+                </div>
+                <button id="agregar" name="agregar" class="btn btn-primary" ng-click="CrearRol()">Agregar</button>
+              </form>
           </div>
         </div>
-
-        <div class="row tablero " ng-controller="TableroCtrl">
-          <div ng-repeat="u in us" class="container col-xs-9 col-sm-6 col-md-4 col-lg-4" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }">
+        <div class="row tablero " ng-controller="TableroRolesCtrl">
+          <div ng-repeat="r in roles" class="container col-xs-9 col-sm-6 col-md-4 col-lg-4" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }">
             <div class="us-card panel panel-primary">
               <span id="eliminar"   id="eliminar" >
-                <a class="label label-sm label-danger pull-right" ng-click="deleteUS($index,u.id)">x</a>
+                <a class="label label-sm label-danger pull-right" ng-click="deleteRoles($index,r.id)">x</a>
               </span>
               <div class="container-fluid">
               <div class="form">
                 <div class="form-group">
-                  <label for="como">Como:</label>
-                  <select id="como" ng-change="editUS(u)" class="form-control" ng-options="r.nombre for r in roles track by r.id" ng-model="u.rol"></select>
-                </div>
-                <div class="form-group">
-                  <label for="quiero">Quiero:</label>
-                  <textarea id=quiero ng-change="editUS(u)" class="form-control" rows="2" ng-model="u.quiero"></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="para">Para:</label>
-                  <textarea id=para ng-change="editUS(u)" class="form-control" rows="2" ng-model="u.para"></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="para">Observaciones:</label>
-                  <textarea id=para ng-change="editUS(u)" class="form-control" rows="2" ng-model="u.observaciones"></textarea>
+                  <label for="rol">Rol:</label>
+                  <input id="rol" ng-change="editRoles(r)" class="form-control" ng-model="r.nombre"></input>
                 </div>
               </div>
-              <div class="form-inline">
-                  <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12 estimacion" >
-                    <label for="estimacion">Estimación:</label><br/>
-                    <input ng-change="editUS(u)" class="form-control" type="number" ng-model="u.estimacion" />
-                  </div>
-                  <div class="form-group col-lg-4 col-md-8 col-sm-8 col-xs-12">
-                    <label for="prioridad">Prioridad:</label><br/>
-                    <select id="prioridad" ng-change="editUS(u)" class="form-control" ng-options="p.nombre for p in prioridades track by p.id" ng-model="u.prioridad"></select>
-                  </div>
-                  <div class="form-group col-lg-5 col-md-12 col-sm-12 col-xs-12">
-                    <label for="estado">Estado:</label><br/>
-                    <select id="estado" ng-change="editUS(u)" class="form-control" ng-options="e.nombre for e in estados track by e.id" ng-model="u.estado"></select>
-                  </div>
-
-                </div>
-                </div>
+              </div>
             </div>
           </div>
-
         </div>
+        
         <!-- /.row -->
       </div>
       <!-- /.container-fluid -->

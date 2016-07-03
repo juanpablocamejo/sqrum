@@ -21,7 +21,8 @@
     <![endif]-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="js/conectar.js"></script>
-  </head><body ng-app="app">
+  </head>
+  <body ng-app="app">
     <div id="wrapper">
       <!-- Navigation -->
       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -147,7 +148,7 @@
               <a href="app.html"><i class="fa fa-fw fa-dashboard"></i> Tablero</a>
             </li>
             <li>
-              <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Estadisticas</a>
+              <a href="roles.html"><i class="fa fa-fw fa-users"></i> Roles</a>
             </li>
             <li class="active">
               <a href="edit-panel.html"><i class="fa fa-fw fa-edit"></i> Agregar/eliminar U.S</a>
@@ -164,6 +165,9 @@
               <h1 class="page-header">SQrum
                 <small>Panel de Alta/Edición</small>
               </h1>
+            </div>
+              <div class="row">
+              <div class="col-md-4">
               <h1>Agregar UserStory</h1>
               <form role="form" name="form" ng-controller="AltaUserStoryCtrl">
                 <div class="form-group">
@@ -174,11 +178,11 @@
                 </div>
                 <div class="form-group">
                   <label class="control-label" for="quiero">Quiero:</label>
-                  <input class="form-control" name="quiero" id="quiero" placeholder="Ej: Hacer algo...." type="text" ng-model="dto.quiero">
+                  <textarea class="form-control" name="quiero" id="quiero" placeholder="Ej: Hacer algo...." type="text" ng-model="dto.quiero"></textarea>
                 </div>
                 <div class="form-group">
                   <label class="control-label" for="para">Para:</label>
-                  <input class="form-control" name="para" id="para" placeholder="Ej: Lograr algo..." type="text" ng-model="dto.para">
+                  <textarea class="form-control" name="para" id="para" placeholder="Ej: Lograr algo..." type="text" ng-model="dto.para"></textarea>
                 </div>
                 <div class="form-group">
                   <label class="control-label" for="obs">Observaciones:</label>
@@ -195,7 +199,11 @@
                 </div>
                 <button id="agregar" name="agregar" class="btn btn-primary" ng-click="CrearUS()">Agregar</button>
               </form>
-            </div>
+              </div>
+              <div class="col-md-4"></div>
+              <div class="col-md-4"></div>
+</div>
+            
           </div>
           <!-- /.row -->
         </div>
