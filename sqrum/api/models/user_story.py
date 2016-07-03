@@ -1,4 +1,5 @@
 from common import db
+from api.models import *
 
 class UserStory(db.Model):
     id = db.Column(db.Integer, primary_key=True)

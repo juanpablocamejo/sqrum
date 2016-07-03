@@ -20,5 +20,5 @@ stories = [
     UserStory(r3, u'Cargar la estimación de una user story', para=u'mantener visible el esfuerzo que implica cada story en el tablero', obs=u'Observaciones', prioridad=1, estimacion=2)
 ]
 iteraciones= [
-    Iteracion(date(2016,1,1),date(2016,1,14))
+    Iteracion(u"Iteracion 1",date(2016,1,1),date(2016,1,14))
     ]

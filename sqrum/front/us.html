@@ -1,0 +1,54 @@
+<div class="us-card panel panel-primary">
+    <span id="eliminar" id="eliminar">
+                <a class="label label-sm label-danger pull-right" ng-click="deleteUS($index,u.id)">x</a>
+              </span>
+    <div class="container-fluid">
+        <div class="form">
+            <div class="form-group">
+                <label for="como">Como:</label>
+                <select id="como" ng-change="editUS(u)" class="form-control" ng-options="r.nombre for r in roles track by r.id" ng-model="u.rol"></select>
+            </div>
+            <div class="form-group">
+                <label for="quiero">Quiero:</label>
+                <textarea id=quiero ng-change="editUS(u)" class="form-control" rows="2" ng-model="u.quiero"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="para">Para:</label>
+                <textarea id=para ng-change="editUS(u)" class="form-control" rows="2" ng-model="u.para"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="para">Observaciones:</label>
+                <textarea id=para ng-change="editUS(u)" class="form-control" rows="2" ng-model="u.observaciones"></textarea>
+            </div>
+        </div>
+        <div class="form-inline">
+            <div class="form-group col-lg-3 col-md-4 col-sm-4 col-xs-12 estimacion">
+                <label for="estimacion">Estimación:</label><br/>
+                <input ng-change="editUS(u)" class="form-control" type="number" ng-model="u.estimacion" />
+            </div>
+            <div class="form-group col-lg-4 col-md-8 col-sm-8 col-xs-12">
+                <label for="prioridad">Prioridad:</label><br/>
+                <select id="prioridad" ng-change="editUS(u)" class="form-control" ng-options="p.nombre for p in prioridades track by p.id" ng-model="u.prioridad"></select>
+            </div>
+            <div class="form-group col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                <label for="estado">Estado:</label><br/>
+                <select id="estado" ng-change="editUS(u)" class="form-control" ng-options="e.nombre for e in estados track by e.id" ng-model="u.estado"></select>
+            </div>
+
+        </div>
+        <div class="form-inline">
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <label for="desarrollador">Desarrollador:</label>
+                <select id="desarrollador" ng-change="editUS(u)" class="form-control" ng-options="d.nombre for d in desarrolladores track by d.id" ng-model="u.desarrollador">
+                    <option value="">Sin asignar</option>
+                </select>
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <label for="iteracion">Iteración:</label>
+            <select id="iteracion" class="form-control" ng-change="editUS(u,true);" ng-options="i.nombre for i in iteraciones track by i.id" ng-model="u.iteracion">
+                <option value="">Sin asignar</option>
+            </select>
+            </div>
+        </div>
+    </div>
+</div>

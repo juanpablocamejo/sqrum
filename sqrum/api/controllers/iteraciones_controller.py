@@ -5,8 +5,9 @@ from dateutil.parser import parse
 #JSON
 iteracion_json = {
     'id': fields.Integer,
-    'inicio':   fields.String,
-    'fin':   fields.String
+    'nombre': fields.String,
+    'inicio': fields.String,
+    'fin': fields.String
 }
 
 #Recursos
@@ -17,7 +18,9 @@ class IteracionesRes(Resource):
     
     def post(self):
         args = request.form
-        i = Iteracion(parse(args['inicio']).date(), parse(args['fin']).date())
+        i = Iteracion(args['nombre'])
+        if 'inicio' in args: i.inicio = parse(args['inicio']).date()
+        if 'fin' in args: i.fin = parse(args['fin']).date()
         db.session.add(i)
         db.session.commit()
         return {'id': i.id}, 201
@@ -44,6 +47,7 @@ class IteracionRes(Resource):
     def put(self, id):
         i = Iteracion.query.get(id)
         args = request.form
+        if 'nombre' in args: i.nombre = args['nombre']
         if 'inicio' in args: i.inicio = parse(args['inicio']).date()
         if 'fin' in args: i.fin = parse(args['fin']).date()
         db.session.add(i)

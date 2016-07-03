@@ -10,6 +10,13 @@ app.directive('menu', function() {
   };
 });
 
+app.directive('userstory', function() {
+  return {
+    restrict: 'E',
+    templateUrl:"us.html"
+  };
+});
+
 
 /// SERVICIOS
 app.service('DATA', function() {
@@ -74,6 +81,22 @@ function CargarRoles(API, scp, key) {
     });
 }
 
+function CargarDesarrolladores(API, scp, key) {
+    return API.GET('/api/desarrollador').then(function(resp) {
+        scp[key] = resp.data;
+    });
+}
+
+function CargarIteraciones(API, scp, key) {
+    return API.GET('/api/iteracion').then(function(resp) {
+        scp[key] = resp.data;
+        scp['cb' + key] =[];
+        for(var i in resp.data){
+            scp['cb' + key][i] = {id:resp.data[i].id, nombe:resp.data[i].nombre};
+        }
+    });
+}
+
 function CargarStories(API, scp, key) {
     return API.GET('/api/user_story/').then(function(resp) {
          scp[key] = ngDTO(resp.data,scp);
@@ -84,16 +107,22 @@ function CargarStories(API, scp, key) {
 function TableroCtrl($scope, API, DATA) {
     $scope.prioridades = DATA.prioridades;
     $scope.estados = DATA.estados;
+    CargarDesarrolladores(API, $scope, "desarrolladores");
+    CargarIteraciones(API, $scope, "iteraciones");
     CargarRoles(API, $scope, "roles").then(function(){
         CargarStories(API, $scope, "us");
     });
     
-    $scope.editUS = function(u){
+    $scope.editUS = function(u,$scope){
         API.PUT('/api/user_story/' + u.id,apiDTO(u)).then(
-            function(){ console.log('EDIT US N°' + u.id +': -> OK');},
+            function(){ console.log('EDIT US N°' + u.id +': -> OK');
+                $scope.$apply();
+            },
             function(resp){ console.log('EDIT US -> ERROR:');console.log(resp);}
         )
     };
+    
+
     
     $scope.deleteUS = function(i, us_id){
         if (confirm("¿Está seguro de eliminar la User Story?")){
@@ -135,12 +164,12 @@ function AltaUserStoryCtrl($scope, API, DATA) {
 }
 app.controller('AltaUserStoryCtrl', AltaUserStoryCtrl);
 
-function AltaRolesCtrl($scope, API) {
+function AltaRolesCtrl($scope, API,$window) {
     $scope.CrearRol = function() {
         API.POST("api/rol/", apiDTO($scope.dto))
             .then(function(resp) {
                     alert("Rol N° " + resp.data.id + " creado correctamente.");
-                    location.reload();
+                    $window.location.reload();
                 },
                 function(resp) {
                     alert("Error al intentar crear un rol nuevo." + JSON.stringify(resp.data));
@@ -150,7 +179,7 @@ function AltaRolesCtrl($scope, API) {
 }
 app.controller('AltaRolesCtrl', AltaRolesCtrl);
 
-/// CONTROLLERS
+
 function TableroRolesCtrl($scope, API, DATA) {
     CargarRoles(API, $scope, "roles");
     
@@ -177,7 +206,7 @@ app.controller('TableroRolesCtrl', TableroRolesCtrl);
 function apiDTO(obj) {
     var res = {}
     for (var k in obj) {
-        if (typeof(obj[k]) == "object" && "id" in obj[k]) {
+        if (obj[k] && typeof(obj[k]) == "object" && "id" in obj[k]) {
             res[k] = obj[k].id;
         }
         else {
@@ -195,19 +224,32 @@ function ngDTO(obj, scp) {
     for (var k in obj) {
        switch(k){
             case "estado_id":
-                res['estado'] = scp.estados[obj[k]-1];
+                res['estado'] = getById(obj[k],scp.estados);
                 break;
             case "rol_id":
-                res['rol'] = scp.roles[obj[k]-1];
+                res['rol'] = getById(obj[k],scp.roles);
                 break;
             case "prioridad":
-                res['prioridad'] = scp.prioridades[obj[k]-1];
+                res['prioridad'] = getById(obj[k],scp.prioridades);
+                break;
+            case "iteracion_id":
+                res['iteracion'] = getById(obj[k],scp.iteraciones);
+                break;
+            case "desarrollador_id":
+                res['desarrollador'] = getById(obj[k],scp.desarrolladores);
                 break;
             default:
                 res[k] = obj[k];
             }
     }
     return res;
+}
+
+function getById(id, arr){
+    for(var i in arr){
+        if (arr[i]['id']==id) {return arr[i];}
+    }
+    return null;
 }
 
 function ngDTOArr(arr,scp){
