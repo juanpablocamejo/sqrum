@@ -234,7 +234,13 @@
             <h2 class="page-header">SQrum
                 <small>Roles</small>
               </h2>
-            <h3>Roles</h3>
+            <form class="form-inline" name="form" ng-controller="AltaRolesCtrl">
+                <div class="form-group">
+                  <label class="control-label" for="como">Crear Rol:</label>
+                  <input class="form-control" name="rol" id="rol" placeholder="Ej: Administrador" type="text" ng-model="dto.nombre">
+                </div>
+                <button id="agregar" name="agregar" class="btn btn-primary" ng-click="CrearRol()">Agregar</button>
+              </form>
           </div>
         </div>
 

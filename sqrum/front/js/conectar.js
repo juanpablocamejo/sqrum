@@ -127,6 +127,54 @@ function AltaUserStoryCtrl($scope, API, DATA) {
 }
 app.controller('AltaUserStoryCtrl', AltaUserStoryCtrl);
 
+function AltaRolesCtrl($scope, API) {
+    $scope.CrearRol = function() {
+        API.POST("api/rol/", apiDTO($scope.dto))
+            .then(function(resp) {
+                    alert("Rol N° " + resp.data.id + " creado correctamente.");
+                    location.reload();
+                },
+                function(resp) {
+                    alert("Error al intentar crear un rol nuevo." + JSON.stringify(resp.data));
+                }
+            );
+    };
+}
+app.controller('AltaRolesCtrl', AltaRolesCtrl);
+
+function CargarStories(API, scp, key) {
+    return API.GET('/api/user_story/').then(function(resp) {
+         scp[key] = ngDTO(resp.data,scp);
+    });
+}
+
+/// CONTROLLERS
+function TableroRolesCtrl($scope, API, DATA) {
+    $scope.prioridades = DATA.prioridades;
+    $scope.estados = DATA.estados;
+    CargarRoles(API, $scope, "roles").then(function(){
+        CargarStories(API, $scope, "us");
+    });
+    
+    $scope.editRoles = function(u){
+        API.PUT('/api/user_story/' + u.id,apiDTO(u)).then(
+            function(){ console.log('EDIT ROL N°' + u.id +': -> OK');},
+            function(resp){ console.log('EDIT ROL -> ERROR:');console.log(resp);}
+        )
+    };
+    
+    $scope.deleteRoles = function(i, rol_id){
+        if (confirm("¿Está seguro de eliminar la User Story?")){
+        API.DELETE('/api/rol/' + rol_id).then(
+            function(){ console.log('DELETE ROL N°' + rol_id +': -> OK'); $scope.us.splice(i,1);},
+            function(resp){ console.log('DELETE ROL N°' + rol_id +'-> ERROR:');console.log(resp);}
+        );
+        }
+    };
+}
+app.controller('TableroRolesCtrl', TableroRolesCtrl);
+
+
 //FUNCIONES AUXILIARES
 
 function apiDTO(obj) {
