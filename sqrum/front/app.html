@@ -10,10 +10,8 @@
   <title>SQrum</title>
   <!-- Bootstrap Core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.4/angular-filter.min.js"></script>
-  <script src="js/conectar.js"></script>
   <!-- Custom CSS -->
+  <link href="css/tablero.css" rel="stylesheet">
   <link href="css/sb-admin.css" rel="stylesheet">
   <!-- Custom Fonts -->
   <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -22,74 +20,12 @@
   <!-- WARNING: Respond.js doesn't work if you view the page via file://
     -->
   <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
     <![endif]-->
-  <style>
-    .tablero .panel {
-      padding: 8px !important;
-    }
-    
-    .tablero {
-      padding: 1px !important;
-    }
-    
-    .us-card {
-      background-color: #E4EAF0;
-    }
-    
-    .us-card input,
-    .us-card select {
-      height: 24px;
-    }
-    
-    .us-card * {
-      border: 0;
-      font-size: 8pt!important;
-      margin: 0px;
-    }
-    
-    .us-card .form-control {
-      width: 100% !important;
-    }
-    
-    .tablero .panel,
-    .us-card .form-control,
-    .us-card form-group {
-      padding: 3px;
-    }
-    
-    .us-card .form-inline .form-control {
-      width: 100% !important;
-    }
-    
-    .us-card .form-inline .form-group {
-      padding: 2px !important;
-    }
-    
-    .us-card label {
-      font-size: 8pt!important;
-    }
-    
-    .tablero .form-inline,
-    .tablero .container-fluid {
-      border-collapse: collapse;
-      border: 0;
-      padding: 1px;
-    }
-    .us-card #eliminar{
-      padding:3px 4px 3px 4px !important;
-      margin-bottom:4px !important;
-    }
-    
-    .us-card .form-inline label{
-      font-size: 7.5pt!important;
-    }
-    .tablero{
-      min-width:500px !important;
-    }
-
-  </style>
+  <script src="js/angular.min.js"></script>
+  <script src="js/angular-filter.min.js"></script>
+  <script src="js/conectar.js"></script>
 </head>
 
 <body ng-controller="TableroCtrl">
