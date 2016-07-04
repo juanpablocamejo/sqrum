@@ -1,4 +1,4 @@
-var app = angular.module('app', [], function($httpProvider) {
+var app = angular.module('app', ['angular.filter'], function($httpProvider) {
     // Use x-www-form-urlencoded Content-Type
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 });
@@ -103,27 +103,30 @@ function CargarStories(API, scp, key) {
     });
 }
 
+
 /// CONTROLLERS
-function TableroCtrl($scope, API, DATA) {
+function TableroCtrl($scope, API, DATA,$window) {
     $scope.prioridades = DATA.prioridades;
     $scope.estados = DATA.estados;
     CargarDesarrolladores(API, $scope, "desarrolladores");
-    CargarIteraciones(API, $scope, "iteraciones");
+    CargarIteraciones(API, $scope, "iteraciones")
     CargarRoles(API, $scope, "roles").then(function(){
         CargarStories(API, $scope, "us");
     });
     
-    $scope.editUS = function(u,$scope){
+    $scope.fdt = function (d) {
+        var arr = d.split('-');
+        var res = arr[2] + '-' + arr[1] + '-' + arr[0];
+        return res;
+    };
+    
+    $scope.editUS = function(u, b){
         API.PUT('/api/user_story/' + u.id,apiDTO(u)).then(
-            function(){ console.log('EDIT US N°' + u.id +': -> OK');
-                $scope.$apply();
-            },
+            function(){ console.log('EDIT US N°' + u.id +': -> OK');},
             function(resp){ console.log('EDIT US -> ERROR:');console.log(resp);}
         )
     };
-    
 
-    
     $scope.deleteUS = function(i, us_id){
         if (confirm("¿Está seguro de eliminar la User Story?")){
         API.DELETE('/api/user_story/' + us_id).then(
