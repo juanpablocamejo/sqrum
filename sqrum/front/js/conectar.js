@@ -186,9 +186,9 @@ app.controller('AltaRolesCtrl', AltaRolesCtrl);
 function TableroRolesCtrl($scope, API, DATA) {
     CargarRoles(API, $scope, "roles");
     
-    $scope.editRoles = function(u){
-        API.PUT('/api/rol/' + u.id,apiDTO(u)).then(
-            function(){ console.log('EDIT ROL N°' + u.id +': -> OK');},
+    $scope.editRoles = function(r){
+        API.PUT('/api/rol/' + r.id,apiDTO(r)).then(
+            function(){ console.log('EDIT ROL N°' + r.id +': -> OK');},
             function(resp){ console.log('EDIT ROL -> ERROR:');console.log(resp);}
         )
     };
@@ -196,7 +196,7 @@ function TableroRolesCtrl($scope, API, DATA) {
     $scope.deleteRoles = function(i, rol_id){
         if (confirm("¿Está seguro de eliminar el rol?")){
         API.DELETE('/api/rol/' + rol_id).then(
-            function(){ console.log('DELETE ROL N°' + rol_id +': -> OK'); $scope.us.splice(i,1);},
+            function(){ console.log('DELETE ROL N°' + rol_id +': -> OK'); $scope.roles.splice(i,1);},
             function(resp){ console.log('DELETE ROL N°' + rol_id +'-> ERROR:');console.log(resp);}
         );
         }
