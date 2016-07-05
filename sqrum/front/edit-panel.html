@@ -194,14 +194,14 @@
                       </div>
                       <div class="form-group">
                         <label class="control-label" for="obs">Observaciones:</label>
-                        <input class="form-control" name="obs" id="obs" placeholder="Ej: Criterios de aceptación..." type="text" ng-model="dto.obs">
+                        <textarea class="form-control" name="obs" id="obs" placeholder="Ej: Criterios de aceptación..." ng-model="dto.obs"></textarea>
                       </div>
                       <div class="form-group">
-                        <label class="control-label" for="estimacion">estimación:</label>
+                        <label class="control-label" for="estimacion">Estimación:</label>
                         <input class="form-control" name="estimacion" id="estimacion" placeholder="Ej: 1,2,3,6..." type="number" ng-model="dto.estimacion" required>
                       </div>
                       <div class="form-group">
-                        <label class="control-label" for="prioridad">prioridad:</label>
+                        <label class="control-label" for="prioridad">Prioridad:</label>
                         <select class="form-control" name="prioridad" id="prioridad" ng-model="dto.prioridad" ng-options="p.nombre for p in prioridades track by p.id">
                               </select>
                       </div>
