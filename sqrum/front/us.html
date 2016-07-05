@@ -6,7 +6,9 @@
         <div class="form">
             <div class="form-group">
                 <label for="como">Como:</label>
-                <select id="como" ng-change="editUS(u)" class="form-control" ng-options="r.nombre for r in roles track by r.id" ng-model="u.rol"></select>
+                <select id="como" ng-change="editUS(u)" class="form-control" ng-options="r.nombre for r in roles track by r.id" ng-model="u.rol">
+                    <option value="">Seleccione...</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="quiero">Quiero:</label>
