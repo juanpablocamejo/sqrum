@@ -58,7 +58,7 @@ class StoryRes(Resource):
             if 'para' in args: us.para = args['para']
             if 'estado' in args: us.estado_id = args['estado']
             if 'rol' in args: us.rol = Rol.query.get(args['rol'])
-            if 'obs' in args: us.observaciones = args['obs']
+            if 'observaciones' in args: us.observaciones = args['observaciones']
             if 'estimacion' in args: us.estimacion = args['estimacion']
             if 'prioridad' in args: us.prioridad = args['prioridad']
             if 'desarrollador' in args: 
