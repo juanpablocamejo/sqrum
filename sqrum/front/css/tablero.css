@@ -60,3 +60,6 @@
     .tablero{
       min-width:500px !important;
     }
+    .us-card textarea {
+   resize: none;
+}
